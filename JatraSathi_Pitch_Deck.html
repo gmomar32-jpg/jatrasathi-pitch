@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JatraSathi (যাত্রাসাথী) — Investor Pitch Deck</title>
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Hind Siliguri', Arial, sans-serif; }
+    body {
+      background: #090D16;
+      color: #F8FAFC;
+      min-height: 100vh;
+      padding: 18px 24px 32px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .player-bar {
+      max-width: 1120px;
+      margin: 0 auto 16px;
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 14px;
+      padding: 11px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+    .player-brand { display: flex; align-items: center; gap: 10px; }
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: #059669;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .player-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .ctrl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1E293B;
+      color: #F8FAFC;
+      border: 1px solid #334155;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ctrl-btn:hover { border-color: #10B981; }
+    .ctrl-btn.emerald { background: #059669; color: #FFFFFF; border-color: #059669; }
+    .ctrl-btn.amber { background: #D97706; color: #FFFFFF; border-color: #D97706; }
+
+    .dot-strip {
+      max-width: 1120px;
+      margin: 0 auto 16px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .s-dot {
+      width: 32px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid #1E293B;
+      background: #111827;
+      color: #94A3B8;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .s-dot.active { background: #059669; color: #FFFFFF; border-color: #10B981; }
+
+    .slide {
+      width: 100%;
+      max-width: 1120px;
+      min-height: 620px;
+      margin: 0 auto 28px;
+      background: linear-gradient(160deg, #0F172A 0%, #111827 100%);
+      border: 1px solid #1E293B;
+      border-radius: 18px;
+      padding: 38px 46px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+    body.show-all .slide { display: flex !important; }
+    .slide.active-slide { display: flex; }
+
+    @media print {
+      body { background: #0F172A; padding: 0; }
+      .player-bar, .dot-strip { display: none !important; }
+      .slide {
+        display: flex !important;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+    }
+
+    .slide-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1E293B;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .brand { font-size: 13px; font-weight: 700; color: #10B981; letter-spacing: 0.8px; text-transform: uppercase; }
+    .slide-num {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #CBD5E1;
+      background: #1E293B;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+    }
+    h1 { font-size: 34px; font-weight: 800; line-height: 1.2; color: #FFFFFF; margin-bottom: 10px; letter-spacing: -0.4px; }
+    h2 { font-size: 26px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .lead { font-size: 15.5px; color: #94A3B8; line-height: 1.55; max-width: 960px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 14px; }
+    .box {
+      background: #111827;
+      border: 1px solid #1E293B;
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .box-accent { border-color: rgba(16, 185, 129, 0.35); background: rgba(6, 78, 59, 0.16); }
+    .box-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .box-head-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    .ico-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      color: #10B981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .box h3 { font-size: 15.5px; font-weight: 700; color: #F8FAFC; }
+    .box p, .box li { font-size: 13.8px; color: #94A3B8; line-height: 1.52; }
+    .box ul { padding-left: 18px; }
+    .stat-big { font-size: 30px; font-weight: 800; color: #10B981; margin-bottom: 4px; }
+    .price-pill {
+      background: rgba(16, 185, 129, 0.14);
+      color: #34D399;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .rank-bar-row {
+      display: grid;
+      grid-template-columns: 110px 145px 1fr 90px;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      background: #111827;
+      border: 1px solid #1E293B;
+      margin-bottom: 6px;
+      font-size: 13.5px;
+    }
+    .r-track { width: 100%; height: 8px; background: #1E293B; border-radius: 999px; overflow: hidden; }
+    .r-fill { height: 100%; background: #10B981; border-radius: 999px; }
+    .founder-photo-sm {
+      width: 54px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1.5px solid #10B981;
+      flex-shrink: 0;
+    }
+    .founder-photo-lg {
+      width: 88px;
+      height: 106px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1.5px solid #10B981;
+      flex-shrink: 0;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #64748B;
+      border-top: 1px solid #1E293B;
+      padding-top: 12px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="player-bar">
+    <div class="player-brand">
+      <div class="logo-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#F8FAFC;">JatraSathi (যাত্রাসাথী) — Investor Pitch Deck</div>
+        <div id="bar-subtitle" style="font-size:12px;color:#10B981;font-weight:600;">Slide 1 of 12 • Use Prev / Next or Keyboard Arrows</div>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" onclick="prevSlide()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+        Prev
+      </button>
+      <button class="ctrl-btn emerald" onclick="nextSlide()">
+        Next
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <button id="mode-btn" class="ctrl-btn" onclick="toggleMode()">View All 12 Slides</button>
+      <button class="ctrl-btn amber" onclick="window.print()">Save as PDF (Ctrl+P)</button>
+    </div>
+  </div>
+
+  <div id="dot-strip" class="dot-strip"></div>
+
+  <!-- SLIDE 01 -->
+  <div class="slide active-slide">
+    <div class="slide-top">
+      <span class="brand">01 • Executive Overview</span>
+      <span class="slide-num">Slide 01 / 12</span>
+    </div>
+    <div style="margin: auto 0;">
+      <h1>JatraSathi (যাত্রাসাথী)<br/><span style="color:#10B981;font-size:24px;">On-Demand Assisted Travel, Daily Care & Medical Companion Platform</span></h1>
+      <p class="lead">
+        Connecting elderly citizens, solo travelers, hospital patients, and expatriate (NRB) families with background-verified <strong>University/College Students & Fresh Graduates</strong> across Bangladesh.
+      </p>
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="box box-accent">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><h3>Customer App</h3></div>
+          <p>6 specialized mobility & care services, 1-Tap Helpline call booking, live tracking, OTP verification & Digital Cash Memo.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3>Student Partner App</h3></div>
+          <p>NID + University ID KYC, Rank 5→0 progressive earnings (30% to 75%), flexible class-friendly shifts & zero vehicle needed.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><h3>Admin Command Center</h3></div>
+          <p>Real-time trip dispatch, two-tier KYC audit, live fare modification & per-trip unpaid commission lock.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="box" style="display:flex;align-items:center;gap:14px;">
+          <img class="founder-photo-sm founder-img-target" alt="Omar Nazrul" />
+          <div>
+            <h3>Omar Nazrul — Founder & CEO</h3>
+            <p>Phone: +8801611454254 • omarnazrul100234@gmail.com</p>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Current Stage: Working MVP (Pre-Revenue QA)</h3>
+          <p>3 connected apps built; completing final UI and workflow bug-fixes before commercial rollout.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi — Trusted Companion for Every Journey</span><span>Startup Bangladesh Pitch Deck</span></div>
+  </div>
+
+  <!-- SLIDE 02 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">02 • The Customer Problem</span>
+      <span class="slide-num">Slide 02 / 12</span>
+    </div>
+    <div>
+      <h2>Ride-Sharing Drops at the Gate — Who Walks Inside With Your Parents?</h2>
+      <p class="lead">Uber and Pathao only provide vehicles. They never enter airport terminals, board intercity trains with an elderly parent, or stand in hospital queues.</p>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>1. Airport & Terminal Chaos</h3></div>
+          <p>Elderly citizens, first-time flyers, and solo passengers struggle with luggage, boarding gates, and forms at HSIA Airport, Kamalapur Rail Station, and Sadarghat Launch Terminal.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>2. 1.3 Crore+ NRBs & Working Children</h3></div>
+          <p>Expatriate Bangladeshis (NRBs) and busy professionals in Dhaka cannot take leave every time their aging parents need a trusted companion for travel or medical checkups.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg></div><h3>3. Hospital Queues & Medical Travel Abroad</h3></div>
+          <p>Managing doctor serials, diagnostic labs, pharmacies, or navigating visa/hospital formalities in India is overwhelming without an educated, literate assistant.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h3>4. Zero Trust in Informal Brokers</h3></div>
+          <p>Hiring unverified station brokers ("dalals") or informal helpers brings safety risks, literacy barriers, and arbitrary overtime money demands at the end of a trip.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>02 • Customer Problem Statement</span></div>
+  </div>
+
+  <!-- SLIDE 03 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">03 • Our Solution & Workflow</span>
+      <span class="slide-num">Slide 03 / 12</span>
+    </div>
+    <div>
+      <h2>Door-to-Door Verified Student Companion in 4 Structured Steps</h2>
+      <p class="lead">Bridging transport and personal care—turning educated University Students & Freshers into background-verified Human Companions.</p>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box box-accent">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>01. 60-Sec App Booking or 1-Tap Helpline</h3></div>
+          <p>Families book via the Customer App—or elderly users simply tap <strong>1-Tap Office Call</strong> so our helpline team books on their behalf without complex forms.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="11" r="2.5"/><path d="M4.5 16.5c.8-1.5 2-2 3.5-2s2.7.5 3.5 2"/><line x1="14" y1="9" x2="19" y2="9"/><line x1="14" y1="13" x2="18" y2="13"/></svg></div><h3>02. Verified Student Sathi Arrives (OTP Start)</h3></div>
+          <p>An NID + University ID verified companion meets the passenger at their doorstep or terminal and starts the trip using a secure 4-digit Start OTP.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>03. Active Care + Customer Timer Lock</h3></div>
+          <p>The companion handles luggage, tickets, forms, and hospital queues. As soon as work finishes, the customer taps <strong>"কাজ শেষ (টাইমার লক)"</strong> to freeze billing.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg></div><h3>04. Transparent Digital Cash Memo</h3></div>
+          <p>Includes a <strong>30-minute free grace period</strong>, zero extra fee for accompanying family members, and an itemized Digital Cash Memo that prevents verbal disputes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>03 • Solution & Booking Workflow</span></div>
+  </div>
+
+  <!-- SLIDE 04 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">04 • Multi-Category Service Portfolio (Exact App Rates)</span>
+      <span class="slide-num">Slide 04 / 12</span>
+    </div>
+    <div>
+      <h2>Not Just Healthcare — 6 Everyday Mobility, Care & Medical Services</h2>
+      <p class="lead">Every service rate below matches the live tariff engine inside our Customer App:</p>
+      <div class="grid-3" style="margin-top:16px;">
+        <div class="box">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>1. Airport Sathi</h3></div><span class="price-pill">৳1,500 Base</span></div>
+          <p>Flight tracking, placard terminal greeting, luggage care & safe home drop (+৳300 City / +৳1,000 Village).</p>
+        </div>
+        <div class="box">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg></div><h3>2. Bus / Train / Launch</h3></div><span class="price-pill">৳1,000 / Trip</span></div>
+          <p>Safe station boarding, coach/cabin locating & elderly passenger handover (+৳300 if luggage exceeds 20kg).</p>
+        </div>
+        <div class="box">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></div><h3>3. Intercity Travel</h3></div><span class="price-pill">৳1,200 / Day</span></div>
+          <p>Market-to-market & inter-district verified escort for elderly parents or solo passengers with live GPS tracking.</p>
+        </div>
+        <div class="box box-accent">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>4. Day-Care Sathi</h3></div><span class="price-pill">৳1,000 / Day</span></div>
+          <p>Personal & official daytime errands (100% online advance payment; strict rule prohibiting cash/gold handling).</p>
+        </div>
+        <div class="box box-accent">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg></div><h3>5. Hospital Sathi</h3></div><span class="price-pill">৳800–1,500</span></div>
+          <p>4h (৳800) to 10h (৳1,500) inside Dhaka; ৳2,500 remote districts. Doctor serials, lab tests, medicine & bedside support.</p>
+        </div>
+        <div class="box box-accent">
+          <div class="box-head-between"><div class="box-head" style="margin:0;"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>6. Medical Abroad</h3></div><span class="price-pill">৳2.5k–3.5k/d</span></div>
+          <p>Full-time English/Hindi/Bangla speaking companion for patients traveling to India & abroad (+ travel & stay).</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>04 • 6 Core Services & Exact Pricing</span></div>
+  </div>
+
+  <!-- SLIDE 05 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">05 • Student & Fresher Workforce Strategy</span>
+      <span class="slide-num">Slide 05 / 12</span>
+    </div>
+    <div>
+      <h2>Why University Students & Freshers Make the Best "JatraSathis"</h2>
+      <p class="lead">Instead of unverified informal helpers, JatraSathi empowers educated College/University Students, Nursing Students, and Fresh Graduates.</p>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box box-accent">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="11" r="2.5"/><path d="M4.5 16.5c.8-1.5 2-2 3.5-2s2.7.5 3.5 2"/><line x1="14" y1="9" x2="19" y2="9"/><line x1="14" y1="13" x2="18" y2="13"/></svg></div><h3>1. 4-Layer Student & Fresher KYC</h3></div>
+          <p>Every partner is vetted through <strong>NID / Birth Certificate</strong>, <strong>University/College Student ID or Academic Certificate</strong>, live selfie verification, and guardian contact.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/></svg></div><h3>2. Literate & Smart for Airport/Hospital Forms</h3></div>
+          <p>Airports (immigration/customs forms) and hospitals (prescriptions, diagnostic billing, English/Bangla signs) require educated youth who communicate politely.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>3. Zero-Capital, Class-Friendly Shifts</h3></div>
+          <p>Unlike ride-sharing (which requires a ৳1.5 Lakh motorcycle), students only need their ID, smartphone, and training to earn honorably on free days.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><h3>4. Disciplined Phased Gender Rollout</h3></div>
+          <p><strong>Year 1:</strong> Launches with strictly vetted Male Student & Fresher Companions.<br/><strong>Year 2:</strong> Expands with a dedicated Female Companion Wing for solo women travelers.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>05 • Student & Fresher Partner Network</span></div>
+  </div>
+
+  <!-- SLIDE 06 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">06 • Product & Anti-Fraud Innovation</span>
+      <span class="slide-num">Slide 06 / 12</span>
+    </div>
+    <div>
+      <h2>Zero-Dispute Architecture Built for Local Realities</h2>
+      <p class="lead">Engineered specifically to prevent time-stalling, price haggling, and safety risks:</p>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box box-accent">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div><h3>1. Two-Tier Smart Customer KYC</h3></div>
+          <p>Public venue bookings (Hospital, Airport, Station) require only Name & Phone for instant booking. Private/long trips (Intercity, Day-Care, Abroad) enforce NID/Passport verification.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3>2. Customer "Work-Done Timer Lock"</h3></div>
+          <p>Prevents companions from stalling at tea stalls to inflate overtime. As soon as work finishes, the customer taps <strong>"কাজ শেষ (টাইমার লক)"</strong> to freeze the billing timer immediately.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>3. 4-Digit Start/End OTP & Free OSRM Maps</h3></div>
+          <p>Trips start and finish only via customer OTP confirmation. Powered by OpenStreetMap + OSRM routing with <strong>BDT 0 monthly map API cost</strong>.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg></div><h3>4. Live Modify & Official Digital Cash Memo</h3></div>
+          <p>Displays Base Fare, live +Hour/+Day/Early-Return adjustments, 30% Online Advance deducted, and exact net Cash Due—eliminating verbal arguments.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>06 • Anti-Fraud & Safety Architecture</span></div>
+  </div>
+
+  <!-- SLIDE 07 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">07 • Business Model & 6-Rank Commission Engine</span>
+      <span class="slide-num">Slide 07 / 12</span>
+    </div>
+    <div>
+      <h2>Merit-Based 6-Rank Revenue Share (No Mandatory Day Limit)</h2>
+      <p class="lead">Companions rank up purely by completed trips &amp; 4.5★ rating at their own pace — ideal for university students working around classes &amp; exams:</p>
+      <div class="grid-2" style="margin-top:14px;">
+        <div>
+          <div class="rank-bar-row"><strong>Rank 5 (Entry)</strong><span>0+ Trips</span><div class="r-track"><div class="r-fill" style="width:30%"></div></div><strong style="color:#10B981;">30% Sathi</strong></div>
+          <div class="rank-bar-row"><strong>Rank 4</strong><span>45+ Trips</span><div class="r-track"><div class="r-fill" style="width:40%"></div></div><strong style="color:#10B981;">40% Sathi</strong></div>
+          <div class="rank-bar-row"><strong>Rank 3</strong><span>105+ Trips • 4.5★</span><div class="r-track"><div class="r-fill" style="width:50%"></div></div><strong style="color:#10B981;">50% Sathi</strong></div>
+          <div class="rank-bar-row"><strong>Rank 2</strong><span>180+ Trips • 4.5★</span><div class="r-track"><div class="r-fill" style="width:60%"></div></div><strong style="color:#10B981;">60% Sathi</strong></div>
+          <div class="rank-bar-row"><strong>Rank 1</strong><span>270+ Trips • 4.5★</span><div class="r-track"><div class="r-fill" style="width:70%"></div></div><strong style="color:#10B981;">70% Sathi</strong></div>
+          <div class="rank-bar-row"><strong>Rank 0 (Elite)</strong><span>500+ Trips • 4.5★</span><div class="r-track"><div class="r-fill" style="width:75%"></div></div><strong style="color:#10B981;">75% Sathi</strong></div>
+        </div>
+        <div class="box box-accent" style="display:flex;flex-direction:column;justify-content:center;">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Flexible Progression + Zero-Leakage Settlement</h3></div>
+          <ul style="margin-top:8px;display:flex;flex-direction:column;gap:10px;">
+            <li><strong>No Day/Tenure Restriction:</strong> Trips can be completed across any number of separate days—whenever a student is free.</li>
+            <li><strong>Upfront Online Advance:</strong> Customers pay <strong>30% Online Advance</strong> (100% for Day-Care) via bKash/Nagad/Rocket before booking confirmation.</li>
+            <li><strong>Automatic Unpaid Lock (<code>COMMISSION_CLEARED</code>):</strong> Partner collects remaining 70% cash at trip end; next trip locks automatically until company due is settled.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>07 • Real App Commission Engine</span></div>
+  </div>
+
+  <!-- SLIDE 08 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">08 • Market Opportunity in Bangladesh</span>
+      <span class="slide-num">Slide 08 / 12</span>
+    </div>
+    <div>
+      <h2>Massive Underserved Care Demand + Ready Student Workforce</h2>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="box box-accent">
+          <div class="stat-big">1.5 Crore+</div>
+          <h3>Senior Citizens in BD</h3>
+          <p>Rapidly growing elderly population in Dhaka, Chattogram & Sylhet needing assisted hospital visits, travel & errands.</p>
+        </div>
+        <div class="box">
+          <div class="stat-big">1.3 Crore+</div>
+          <h3>Expatriate (NRB) Families</h3>
+          <p>Millions of NRBs in the Middle East, Europe & North America actively pay for reliable local support for aging parents.</p>
+        </div>
+        <div class="box">
+          <div class="stat-big">40 Lakh+</div>
+          <h3>College & Uni Students</h3>
+          <p>Ready nationwide supply of educated youth seeking dignified, flexible part-time income without vehicle capital.</p>
+        </div>
+      </div>
+      <div class="box" style="margin-top:16px;">
+        <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div><h3>5 Lakh+ Annual Outbound Medical & First-Time Flyers — Priority Hubs</h3></div>
+        <p>Launching first around Dhaka's highest-density hubs: <strong>HSIA Airport, Kamalapur Rail Station, Sadarghat, DMCH, BMU (PG), Square & Evercare Hospital</strong>.</p>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>08 • Market Size & Hub Strategy</span></div>
+  </div>
+
+  <!-- SLIDE 09 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">09 • Social Impact & SDG Alignment</span>
+      <span class="slide-num">Slide 09 / 12</span>
+    </div>
+    <div>
+      <h2>Dignified Youth Employment (SDG 8) + Safe Mobility (SDG 3 & 5)</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box box-accent">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3>SDG 8: Decent Work for Students & Freshers</h3></div>
+          <p>Eliminates the capital barrier of gig work (no bike or car required). University students, nursing students, and job-seeking freshers earn honorably while building real-world communication, empathy, and service skills.</p>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>SDG 3 & 5: Independent Elderly & Family Mobility</h3></div>
+          <p>Ensures senior citizens and patients never miss critical medical checkups or fear traveling alone. Our Year 2 dedicated Female Wing will further empower solo women travelers and female students.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>09 • Social Impact & Sustainability</span></div>
+  </div>
+
+  <!-- SLIDE 10 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">10 • Current Stage & Founder Investment (BDT 55,000)</span>
+      <span class="slide-num">Slide 10 / 12</span>
+    </div>
+    <div>
+      <h2>Working MVP Built • BDT 55,000 Founder Bootstrapped • Pre-Revenue QA</h2>
+      <p class="lead">Complete transparency for Startup Bangladesh—built from personal savings with zero external debt or inflated metrics:</p>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="box">
+          <div class="stat-big">MVP Built</div>
+          <h3>3 Connected Apps</h3>
+          <p>Customer App, Student Partner App & Admin Command Center built with Flutter, Supabase Realtime & OSRM Maps.</p>
+        </div>
+        <div class="box box-accent">
+          <div class="stat-big">BDT 55,000</div>
+          <h3>Founder Self-Investment</h3>
+          <p><strong>BDT 55,000 (৳৫৫,০০০)</strong> personally bootstrapped by Founder Omar Nazrul for MVP development & R&D (BDT 0 external VC/loan).</p>
+        </div>
+        <div class="box">
+          <div class="stat-big">Pre-Revenue</div>
+          <h3>Revenue = BDT 0 (QA)</h3>
+          <p>Currently fixing final app bugs & rank sync issues before onboarding our first student cohort and starting bookings.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>10 • Honest Stage & Founder Investment</span></div>
+  </div>
+
+  <!-- SLIDE 11 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">11 • Founder Profile & Campus Advantage</span>
+      <span class="slide-num">Slide 11 / 12</span>
+    </div>
+    <div>
+      <h2>Execution-Focused Leadership with Direct Student Network Access</h2>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="box box-accent" style="display:flex;gap:16px;align-items:flex-start;">
+          <img class="founder-photo-lg founder-img-target" alt="Omar Nazrul" />
+          <div>
+            <h3>Omar Nazrul — Founder & CEO</h3>
+            <ul style="margin-top:8px;display:flex;flex-direction:column;gap:7px;">
+              <li><strong>Education:</strong> B.Sc in Geography & Environmental Science (4th Year), Dania University College, Dhaka (<strong>Expected Graduation: June 2027</strong>).</li>
+              <li><strong>Operations Experience:</strong> Hands-on execution at <strong>D-Box (8 months)</strong>, <strong>CAST (4 months)</strong>, and telecom call center support.</li>
+              <li><strong>Leadership:</strong> LCOY Bangladesh 2023, CPD Youth Conference 2023 & Reuters Digital Journalism certified.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="box">
+          <div class="box-head"><div class="ico-wrap"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3>Built-In Campus Recruitment Moat</h3></div>
+          <ul style="margin-top:8px;display:flex;flex-direction:column;gap:8px;">
+            <li>As an active 4th-year university student and youth organizer in Dhaka, Omar has direct grassroots access to college and university communities.</li>
+            <li>Enables onboarding and verifying trustworthy <strong>Student & Fresher Partners</strong> through campus ambassadors at near-zero acquisition cost.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>JatraSathi Pitch Deck</span><span>11 • Founder & Team</span></div>
+  </div>
+
+  <!-- SLIDE 12 -->
+  <div class="slide">
+    <div class="slide-top">
+      <span class="brand">12 • Seed Funding Ask & Use of Funds</span>
+      <span class="slide-num">Slide 12 / 12</span>
+    </div>
+    <div>
+      <h2>Seed Funding Ask: <span style="color:#10B981;">BDT 28,00,000 (28 Lakh BDT)</span></h2>
+      <p class="lead">12-month execution budget for app QA, RJSC registration, 200 Student Partners, Dhaka hubs &amp; specialized Overseas Companion Training:</p>
+      <div style="width:100%;height:14px;border-radius:999px;overflow:hidden;display:flex;margin-top:16px;border:1px solid #334155;">
+        <div style="width:40%;background:#059669;"></div>
+        <div style="width:35%;background:#0EA5E9;"></div>
+        <div style="width:18%;background:#D97706;"></div>
+        <div style="width:7%;background:#8B5CF6;"></div>
+      </div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="box box-accent">
+          <div class="box-head-between"><h3>1. Student Onboarding &amp; Domestic Training</h3><span class="price-pill">40% • BDT 11.20 Lakh</span></div>
+          <p><strong>BDT 11,20,000:</strong> Campus recruitment, NID + Student ID verification, ID cards/vests, and domestic airport/hospital care training for first 200 Sathis.</p>
+        </div>
+        <div class="box">
+          <div class="box-head-between"><h3>2. Hospital/Airport Hubs &amp; NRB Marketing</h3><span class="price-pill" style="color:#38BDF8;border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.12);">35% • BDT 9.80 Lakh</span></div>
+          <p><strong>BDT 9,80,000:</strong> Hospital awareness booths (DMCH, PG, Square, Evercare), airport outreach &amp; digital campaigns for expat NRB families.</p>
+        </div>
+        <div class="box">
+          <div class="box-head-between"><h3>3. Tech Finalization, App Stores &amp; Legal</h3><span class="price-pill" style="color:#FBBF24;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.12);">18% • BDT 5.00 Lakh</span></div>
+          <p><strong>BDT 5,00,000:</strong> Final app bug-fixing, Google Play &amp; App Store publishing, SMS OTP gateway, bKash Merchant API &amp; RJSC incorporation.</p>
+        </div>
+        <div class="box">
+          <div class="box-head-between"><h3>4. Medical Abroad &amp; Overseas Companion Training</h3><span class="price-pill" style="color:#C084FC;border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.12);">7% • BDT 2.00 Lakh</span></div>
+          <p><strong>BDT 2,00,000:</strong> Specialized training for companions traveling abroad with patients (immigration, visa documentation, foreign hospital protocols in India &amp; abroad).</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Thank You • Omar Nazrul (+8801611454254 | omarnazrul100234@gmail.com)</span>
+      <span>JatraSathi (যাত্রাসাথী)</span>
+    </div>
+  </div>
+
+  <script>
+    const FOUNDER_PHOTO = "data:image/jpeg;base64,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";
+    document.querySelectorAll('.founder-img-target').forEach(img => { img.src = FOUNDER_PHOTO; });
+
+    const slideEls = Array.from(document.querySelectorAll('.slide'));
+    const dotStrip = document.getElementById('dot-strip');
+    const subtitle = document.getElementById('bar-subtitle');
+    const modeBtn = document.getElementById('mode-btn');
+    let cur = 0;
+    let showAll = false;
+
+    function updateDeck() {
+      slideEls.forEach((el, i) => {
+        el.classList.toggle('active-slide', i === cur);
+      });
+      subtitle.textContent = showAll
+        ? 'Showing All 12 Slides (Ready to Print / Save as PDF)'
+        : `Slide ${cur + 1} of ${slideEls.length} • Use Prev / Next or Keyboard Arrows`;
+      dotStrip.innerHTML = slideEls.map((_, i) =>
+        `<button class="s-dot ${i === cur && !showAll ? 'active' : ''}" onclick="goSlide(${i})">${i + 1}</button>`
+      ).join('');
+    }
+    function prevSlide() {
+      showAll = false;
+      document.body.classList.remove('show-all');
+      modeBtn.textContent = 'View All 12 Slides';
+      cur = (cur - 1 + slideEls.length) % slideEls.length;
+      updateDeck();
+    }
+    function nextSlide() {
+      showAll = false;
+      document.body.classList.remove('show-all');
+      modeBtn.textContent = 'View All 12 Slides';
+      cur = (cur + 1) % slideEls.length;
+      updateDeck();
+    }
+    function goSlide(n) {
+      showAll = false;
+      document.body.classList.remove('show-all');
+      modeBtn.textContent = 'View All 12 Slides';
+      cur = n;
+      updateDeck();
+    }
+    function toggleMode() {
+      showAll = !showAll;
+      document.body.classList.toggle('show-all', showAll);
+      modeBtn.textContent = showAll ? 'Single Slide Mode' : 'View All 12 Slides';
+      updateDeck();
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+    updateDeck();
+  </script>
+</body>
+</html>
